@@ -3,8 +3,7 @@ package subway.controller;
 import static subway.view.InputView.inputOption;
 import static subway.view.OutputView.*;
 import java.util.function.Supplier;
-import subway.domain.Line;
-import subway.domain.LineRepository;
+import subway.application.LineService;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 import subway.view.InputView;
@@ -34,8 +33,7 @@ public class SubwayController {
 
 		if (option.equals("1")) {
 			String stationName = retryInput(InputView::inputAddStation);
-			Station station = Station.of(stationName);
-			StationRepository.addStation(station);
+			StationRepository.addStation(Station.of(stationName));
 		} else if (option.equals("2")) {
 			String stationName = retryInput(InputView::inputRemoveStation);
 			StationRepository.deleteStation(stationName);
@@ -50,12 +48,20 @@ public class SubwayController {
 		String option = inputOption();
 
 		if (option.equals("1")) {
+			addLine();
+		}
+	}
+
+	private void addLine() {
+		try {
 			String lineName = retryInput(InputView::inputAddLine);
 			String startName = retryInput(() -> InputView.inputLastStation("상행"));
 			String lastName = retryInput(() -> InputView.inputLastStation("하행"));
-			Line line = Line.of(lineName, findStationByName(startName), findStationByName(lastName));
-			LineRepository.addLine(line);
+			LineService.addLine(lineName, startName, lastName);
 			OutputView.printInfoMessage("지하철 노선이 등록되었습니다.");
+		} catch (IllegalArgumentException e) {
+			printErrorMessage(e.getMessage());
+			addLine();
 		}
 	}
 
@@ -66,9 +72,5 @@ public class SubwayController {
 			printErrorMessage(e.getMessage());
 			return retryInput(supplier);
 		}
-	}
-
-	private Station findStationByName(String name) {
-		return StationRepository.findByName(name).get();
 	}
 }
