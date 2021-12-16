@@ -52,10 +52,12 @@ public class SubwayController {
 		if (option.equals("1")) {
 			addLine();
 			OutputView.printInfoMessage("지하철 노선이 등록되었습니다.");
-		} else if(option.equals("2")) {
+		} else if (option.equals("2")) {
 			String lineName = retryInput(InputView::inputRemoveLine);
 			LineRepository.deleteLineByName(lineName);
 			OutputView.printInfoMessage("지하철 노선이 삭제되었습니다.");
+		} else if (option.equals("3")) {
+			OutputView.printLines(LineRepository.lines());
 		}
 	}
 

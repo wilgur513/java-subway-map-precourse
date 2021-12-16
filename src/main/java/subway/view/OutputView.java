@@ -1,6 +1,7 @@
 package subway.view;
 
 import java.util.List;
+import subway.domain.Line;
 import subway.domain.Station;
 
 public class OutputView {
@@ -52,6 +53,12 @@ public class OutputView {
 	public static void printStations(List<Station> stations) {
 		printHeader("역 목록");
 		stations.stream().map(Station::getName).forEach(OutputView::printInfo);
+		printBlankLine();
+	}
+
+	public static void printLines(List<Line> lines) {
+		printHeader("노선 목록");
+		lines.stream().map(Line::getName).forEach(OutputView::printInfo);
 		printBlankLine();
 	}
 
