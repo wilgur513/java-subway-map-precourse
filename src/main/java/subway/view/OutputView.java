@@ -63,6 +63,18 @@ public class OutputView {
 		printBlankLine();
 	}
 
+	public static void printSubwayMap(List<Line> lines) {
+		printHeader("지하철 노선도");
+		lines.stream().forEach(OutputView::printSubwayMapEachLine);
+	}
+
+	private static void printSubwayMapEachLine(Line l) {
+		printInfo(l.getName());
+		printInfo("---");
+		l.getStations().stream().map(Station::getName).forEach(OutputView::printInfo);
+		printBlankLine();
+	}
+
 	private static void printHeader(String message) {
 		System.out.println("## " + message);
 	}

@@ -58,4 +58,8 @@ public class Line {
     public boolean isRemovableStation() {
         return stations.size() > 2;
     }
+
+    public List<Station> getStations() {
+        return stations;
+    }
 }

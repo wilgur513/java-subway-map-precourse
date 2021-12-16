@@ -14,7 +14,7 @@ public class SubwayController {
 	public void service() {
 		while (true) {
 			printMainPage();
-			String option = retryInput(() -> inputOption("1", "2", "3", "Q"));
+			String option = retryInput(() -> inputOption("1", "2", "3", "4", "Q"));
 
 			if (option.equals("1")) {
 				manageStation();
@@ -22,6 +22,8 @@ public class SubwayController {
 				manageLine();
 			} else if (option.equals("3")) {
 				manageSection();
+			} else if(option.equals("4")) {
+				printSubwayMap();
 			} else if (option.equals("Q")) {
 				break;
 			}
@@ -91,7 +93,6 @@ public class SubwayController {
 			String order = retryInput(InputView::inputStationOrder);
 			LineService.addSection(lineName, stationName, Integer.valueOf(order));
 			OutputView.printInfoMessage("구간이 등록되었습니다.");
-			System.out.println(LineRepository.lines());
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 			addSection();
@@ -104,10 +105,13 @@ public class SubwayController {
 			String stationName = retryInput(InputView::inputExistStation);
 			LineService.deleteSection(lineName, stationName);
 			OutputView.printInfoMessage("구간이 삭제되었습니다.");
-			System.out.println(LineRepository.lines());
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
+	}
+
+	private void printSubwayMap() {
+		OutputView.printSubwayMap(LineRepository.lines());
 	}
 
 	private String retryInput(Supplier<String> supplier) {

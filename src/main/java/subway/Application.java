@@ -11,9 +11,6 @@ import subway.domain.StationRepository;
 public class Application {
 	public static void main(String[] args) {
 		saveInitialData();
-
-		System.out.println(LineRepository.lines());
-
 		SubwayController controller = new SubwayController();
 		controller.service();
 	}
