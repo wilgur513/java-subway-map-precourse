@@ -2,21 +2,41 @@ package subway.view;
 
 public class OutputView {
 	public static void printMainPage() {
-		System.out.println("## 화면 출력");
-		System.out.println("1. 역 관리");
-		System.out.println("2. 노선 관리");
-		System.out.println("3. 구간 관리");
-		System.out.println("4. 지하철 노선도 출력");
-		System.out.println("Q. 종료");
-		System.out.println();
+		printHeader("화면 출력");
+		printOptionMenu("1", "역 관리");
+		printOptionMenu("2", "노선 관리");
+		printOptionMenu("3", "구간 관리");
+		printOptionMenu("Q", "종료");
+		printBlankLine();
 	}
 
 	public static void printManageStationPage() {
-		System.out.println("## 역 관리 화면");
-		System.out.println("1. 역 등록");
-		System.out.println("2. 역 삭제");
-		System.out.println("3. 역 조회");
-		System.out.println("B. 돌아가기");
+		printHeader("역 관리 화면");
+		printOptionMenu("1", "역 등록");
+		printOptionMenu("2", "역 삭제");
+		printOptionMenu("3", "역 조회");
+		printOptionMenu("B", "돌아가기");
+		printBlankLine();
+	}
+
+	public static void printManageLinePage() {
+		printHeader("노선 관리 화면");
+		printOptionMenu("1", "노선 등록");
+		printOptionMenu("2", "노선 삭제");
+		printOptionMenu("3", "노선 조회");
+		printOptionMenu("B", "돌아가기");
+		printBlankLine();
+	}
+
+	private static void printHeader(String message) {
+		System.out.println("## " + message);
+	}
+
+	private static void printOptionMenu(String option, String name) {
+		System.out.println(option + ". " + name);
+	}
+
+	private static void printBlankLine() {
 		System.out.println();
 	}
 }

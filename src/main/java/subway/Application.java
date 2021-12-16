@@ -1,8 +1,7 @@
 package subway;
 
 import static subway.view.InputView.inputOption;
-import static subway.view.OutputView.printMainPage;
-import static subway.view.OutputView.printManageStationPage;
+import static subway.view.OutputView.*;
 
 public class Application {
 	public static void main(String[] args) {
@@ -11,6 +10,8 @@ public class Application {
 
 		if (option.equals("1")) {
             printManageStationPage();
+		} else if(option.equals("2")) {
+			printManageLinePage();
 		}
 	}
 }
