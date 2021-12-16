@@ -1,9 +1,7 @@
 package subway.view;
 
+import static subway.view.Validator.*;
 import java.util.Scanner;
-import subway.domain.LineRepository;
-import subway.domain.Station;
-import subway.domain.StationRepository;
 
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
@@ -14,19 +12,28 @@ public class InputView {
 
 	public static String inputAddStation() {
 		String value = inputWithMessage("등록할 역 이름을 입력하세요.");
-		validateAddStationName(value);
+		validateLength(value, 2, "역 이름은 2글자 이상이여야 합니다.");
+		validateIsExistStation(value, "이미 등록된 역 이름입니다.");
 		return value;
 	}
 
 	public static String inputRemoveStation() {
 		String value = inputWithMessage("삭제할 역 이름을 입력하세요.");
-		validateRemoveStationName(value);
+		validateIsNotExistStation(value, "등록되지 않은 역 이름입니다.");
+		validateIsStationIncludeInLine(value, "노선에 등록된 역입니다.");
 		return value;
 	}
 
 	public static String inputAddLine() {
 		String value = inputWithMessage("등록할 노선 이름을 입력하세요.");
-		validateAddLineName(value);
+		validateLength(value, 2, "노선 이름은 2글자 이상이여야 합니다.");
+		validateExistLine(value, "이미 등록된 노선입니다.");
+		return value;
+	}
+
+	public static String inputLastStation(String type) {
+		String value = inputWithMessage("등록할 노선의 " + type + " 종점역 이름을 입력하세요.");
+		validateIsNotExistStation(value, "등록되지 않은 역 이름입니다.");
 		return value;
 	}
 
@@ -35,40 +42,5 @@ public class InputView {
 		String value = SCANNER.next();
 		System.out.println();
 		return value;
-	}
-
-	private static void validateAddStationName(String value) {
-		if (value.length() < 2) {
-			throw new IllegalArgumentException("역 이름은 2글자 이상이여야 합니다.");
-		}
-		if (StationRepository.existsByName(value)) {
-			throw new IllegalArgumentException("이미 등록된 역 이름입니다.");
-		}
-	}
-
-	private static void validateRemoveStationName(String value) {
-		if(!StationRepository.existsByName(value)) {
-			throw new IllegalArgumentException("등록되지 않은 역 이름입니다.");
-		}
-
-		if(isIncludeInLine(value)) {
-			throw new IllegalArgumentException("노선에 등록된 역입니다.");
-		}
-	}
-
-	private static boolean isIncludeInLine(String value) {
-		Station station = StationRepository.findByName(value).get();
-		return LineRepository.lines().stream()
-			.anyMatch(l -> l.hasStation(station));
-	}
-
-	private static void validateAddLineName(String value) {
-		if(value.length() < 2) {
-			throw new IllegalArgumentException("노선 이름은 2글자 이상이여야 합니다.");
-		}
-
-		if(LineRepository.existsByName(value)) {
-			throw new IllegalArgumentException("이미 등록된 노선 이름입니다.");
-		}
 	}
 }

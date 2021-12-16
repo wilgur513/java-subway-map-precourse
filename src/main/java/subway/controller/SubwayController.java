@@ -36,7 +36,6 @@ public class SubwayController {
 			String stationName = retryInput(InputView::inputAddStation);
 			Station station = Station.of(stationName);
 			StationRepository.addStation(station);
-			OutputView.printInfoMessage("지하철 역이 등록되었습니다.");
 		} else if (option.equals("2")) {
 			String stationName = retryInput(InputView::inputRemoveStation);
 			StationRepository.deleteStation(stationName);
@@ -52,7 +51,9 @@ public class SubwayController {
 
 		if (option.equals("1")) {
 			String lineName = retryInput(InputView::inputAddLine);
-			Line line = Line.of(lineName);
+			String startName = retryInput(() -> InputView.inputLastStation("상행"));
+			String lastName = retryInput(() -> InputView.inputLastStation("하행"));
+			Line line = Line.of(lineName, findStationByName(startName), findStationByName(lastName));
 			LineRepository.addLine(line);
 			OutputView.printInfoMessage("지하철 노선이 등록되었습니다.");
 		}
@@ -65,5 +66,9 @@ public class SubwayController {
 			printErrorMessage(e.getMessage());
 			return retryInput(supplier);
 		}
+	}
+
+	private Station findStationByName(String name) {
+		return StationRepository.findByName(name).get();
 	}
 }
