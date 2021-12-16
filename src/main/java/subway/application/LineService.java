@@ -38,6 +38,10 @@ public class LineService {
 			throw new IllegalArgumentException("노선에 등록된 역이 없습니다.");
 		}
 
+		if (!line.isRemovableStation()) {
+			throw new IllegalArgumentException("노선에 등록된 역이 2개입니다.");
+		}
+
 		line.deleteStation(station);
 	}
 

@@ -10,6 +10,7 @@ public class OutputView {
 		printOptionMenu("1", "역 관리");
 		printOptionMenu("2", "노선 관리");
 		printOptionMenu("3", "구간 관리");
+		printOptionMenu("4", "지하철 노선도 출력");
 		printOptionMenu("Q", "종료");
 		printBlankLine();
 	}

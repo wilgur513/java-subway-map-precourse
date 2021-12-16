@@ -54,4 +54,8 @@ public class Line {
     public void deleteStation(Station station) {
         stations.remove(station);
     }
+
+    public boolean isRemovableStation() {
+        return stations.size() > 2;
+    }
 }
