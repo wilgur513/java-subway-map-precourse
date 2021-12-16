@@ -45,6 +45,24 @@ public class InputView {
 		return value;
 	}
 
+	public static String inputExistLine() {
+		String value = inputWithMessage("노선을 입력하세요.");
+		validateIsNotExistLine(value, "동록되지 않은 노선 이름입니다.");
+		return value;
+	}
+
+	public static String inputExistStation() {
+		String value = inputWithMessage("역이름을 입력하세요.");
+		validateIsNotExistStation(value, "등록되지 않은 역 이름입니다.");
+		return value;
+	}
+
+	public static String inputStationOrder() {
+		String value = inputWithMessage("순서를 입력하세요.");
+		validateIsNumber(value, "순서는 숫자여야 합니다.");
+		return value;
+	}
+
 	private static String inputWithMessage(String message) {
 		System.out.println("## " + message);
 		String value = SCANNER.next();

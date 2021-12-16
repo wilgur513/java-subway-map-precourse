@@ -15,7 +15,17 @@ public class LineService {
 		LineRepository.addLine(line);
 	}
 
+	public static void addSection(String lineName, String stationName, Integer order) {
+		Line line = findLineByName(lineName);
+		Station station = findStationByName(stationName);
+		line.addStation(station, order - 1);
+	}
+
 	private static Station findStationByName(String name) {
 		return StationRepository.findByName(name).get();
+	}
+
+	private static Line findLineByName(String name) {
+		return LineRepository.findByName(name).get();
 	}
 }

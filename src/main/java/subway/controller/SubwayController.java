@@ -21,7 +21,7 @@ public class SubwayController {
 			} else if (option.equals("2")) {
 				manageLine();
 			} else if (option.equals("3")) {
-				printManageSectionPage();
+				manageSection();
 			} else if (option.equals("Q")) {
 				break;
 			}
@@ -70,6 +70,29 @@ public class SubwayController {
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 			addLine();
+		}
+	}
+
+	private void manageSection() {
+		printManageSectionPage();
+		String option = retryInput(() -> inputOption("1", "2", "B"));
+
+		if (option.equals("1")) {
+			addSection();
+		}
+	}
+
+	private void addSection() {
+		try {
+			String lineName = retryInput(InputView::inputExistLine);
+			String stationName = retryInput(InputView::inputExistStation);
+			String order = retryInput(InputView::inputStationOrder);
+			LineService.addSection(lineName, stationName, Integer.valueOf(order));
+			OutputView.printInfoMessage("구간이 등록되었습니다.");
+			System.out.println(LineRepository.lines());
+		} catch (IllegalArgumentException e) {
+			printErrorMessage(e.getMessage());
+			addSection();
 		}
 	}
 

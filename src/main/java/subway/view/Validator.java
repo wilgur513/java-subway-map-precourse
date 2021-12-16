@@ -53,4 +53,10 @@ public class Validator {
 			throw new IllegalArgumentException(errorMessage);
 		}
 	}
+
+	public static void validateIsNumber(String value, String errorMessage) {
+		if (!value.matches("[0-9]+")) {
+			throw new IllegalArgumentException(errorMessage);
+		}
+	}
 }
