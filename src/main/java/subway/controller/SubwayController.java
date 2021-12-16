@@ -39,10 +39,8 @@ public class SubwayController {
 		try {
 			return InputView.inputStation();
 		} catch (IllegalArgumentException e) {
-			System.out.println("[ERROR] " + e.getMessage());
-			System.out.println();
+			printErrorMessage(e.getMessage());
 			return inputStation();
 		}
 	}
-
 }

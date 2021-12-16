@@ -36,12 +36,21 @@ public class OutputView {
 		printBlankLine();
 	}
 
+	public static void printErrorMessage(String message) {
+		printError(message);
+		printBlankLine();
+	}
+
 	private static void printHeader(String message) {
 		System.out.println("## " + message);
 	}
 
 	private static void printOptionMenu(String option, String name) {
 		System.out.println(option + ". " + name);
+	}
+
+	private static void printError(String message) {
+		System.out.println("[ERROR] " + message);
 	}
 
 	private static void printBlankLine() {
