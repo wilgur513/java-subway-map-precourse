@@ -3,7 +3,7 @@ package subway.domain;
 public class Line {
     private String name;
 
-    public Line(String name) {
+    private Line(String name) {
         this.name = name;
     }
 
@@ -11,5 +11,7 @@ public class Line {
         return name;
     }
 
-    // 추가 기능 구현
+    public static Line of(String name) {
+        return new Line(name);
+    }
 }
