@@ -1,9 +1,10 @@
 package subway.controller;
 
+import static subway.view.InputView.inputOption;
+import static subway.view.OutputView.*;
 import subway.domain.Station;
 import subway.domain.StationRepository;
-import static subway.view.InputView.*;
-import static subway.view.OutputView.*;
+import subway.view.InputView;
 
 public class SubwayController {
 	public void service() {
@@ -34,5 +35,14 @@ public class SubwayController {
 		}
 	}
 
+	private String inputStation() {
+		try {
+			return InputView.inputStation();
+		} catch (IllegalArgumentException e) {
+			System.out.println("[ERROR] " + e.getMessage());
+			System.out.println();
+			return inputStation();
+		}
+	}
 
 }

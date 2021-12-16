@@ -10,7 +10,11 @@ public class InputView {
 	}
 
 	public static String inputStation() {
-		return inputWithMessage("등록할 역 이름을 입력하세요.");
+		String value = inputWithMessage("등록할 역 이름을 입력하세요.");
+		if(value.length() < 2) {
+			throw new IllegalArgumentException("역 이름은 2글자 이상이여야 합니다.");
+		}
+		return value;
 	}
 
 	private static String inputWithMessage(String message) {
