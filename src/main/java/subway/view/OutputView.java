@@ -41,6 +41,11 @@ public class OutputView {
 		printBlankLine();
 	}
 
+	public static void printInfoMessage(String message) {
+		printInfo(message);
+		printBlankLine();
+	}
+
 	private static void printHeader(String message) {
 		System.out.println("## " + message);
 	}
@@ -51,6 +56,10 @@ public class OutputView {
 
 	private static void printError(String message) {
 		System.out.println("[ERROR] " + message);
+	}
+
+	private static void printInfo(String message) {
+		System.out.println("[INFO] " + message);
 	}
 
 	private static void printBlankLine() {

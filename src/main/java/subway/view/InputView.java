@@ -10,9 +10,15 @@ public class InputView {
 		return inputWithMessage("원하는 기능을 선택하세요.");
 	}
 
-	public static String inputStation() {
+	public static String inputAddStation() {
 		String value = inputWithMessage("등록할 역 이름을 입력하세요.");
 		validateStationName(value);
+		return value;
+	}
+
+	public static String inputRemoveStation() {
+		String value = inputWithMessage("삭제할 역 이름을 입력하세요.");
+		validateRemoveStationName(value);
 		return value;
 	}
 
@@ -29,6 +35,12 @@ public class InputView {
 		}
 		if (StationRepository.existsByName(value)) {
 			throw new IllegalArgumentException("이미 등록된 역 이름입니다.");
+		}
+	}
+
+	private static void validateRemoveStationName(String value) {
+		if(!StationRepository.existsByName(value)) {
+			throw new IllegalArgumentException("등록되지 않은 역 이름입니다.");
 		}
 	}
 }
