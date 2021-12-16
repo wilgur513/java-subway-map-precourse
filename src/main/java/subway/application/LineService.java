@@ -23,6 +23,10 @@ public class LineService {
 			throw new IllegalArgumentException("이미 등록된 역이 노선에 있습니다.");
 		}
 
+		if (!line.isValidOrder(order - 1)) {
+			throw new IllegalArgumentException("순서가 잘못되었습니다.");
+		}
+
 		line.addStation(station, order - 1);
 	}
 

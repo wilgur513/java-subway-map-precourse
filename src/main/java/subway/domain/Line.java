@@ -46,4 +46,8 @@ public class Line {
             ", stations=" + stations +
             '}';
     }
+
+    public boolean isValidOrder(Integer order) {
+        return order >= 0 && order <= stations.size();
+    }
 }
