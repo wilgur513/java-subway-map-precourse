@@ -75,7 +75,7 @@ public class OutputView {
 		printBlankLine();
 	}
 
-	private static void printHeader(String message) {
+	static void printHeader(String message) {
 		System.out.println("## " + message);
 	}
 
@@ -91,7 +91,7 @@ public class OutputView {
 		System.out.println("[INFO] " + message);
 	}
 
-	private static void printBlankLine() {
+	static void printBlankLine() {
 		System.out.println();
 	}
 }

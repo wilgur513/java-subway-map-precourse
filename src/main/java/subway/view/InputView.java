@@ -64,9 +64,9 @@ public class InputView {
 	}
 
 	private static String inputWithMessage(String message) {
-		System.out.println("## " + message);
+		OutputView.printHeader(message);
 		String value = SCANNER.next();
-		System.out.println();
+		OutputView.printBlankLine();
 		return value;
 	}
 }
