@@ -18,6 +18,11 @@ public class LineService {
 	public static void addSection(String lineName, String stationName, Integer order) {
 		Line line = findLineByName(lineName);
 		Station station = findStationByName(stationName);
+
+		if (line.hasStation(station)) {
+			throw new IllegalArgumentException("이미 등록된 역이 노선에 있습니다.");
+		}
+
 		line.addStation(station, order - 1);
 	}
 

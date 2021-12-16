@@ -36,7 +36,7 @@ public class Line {
     }
 
     public boolean hasStation(Station station) {
-        return stations.stream().anyMatch(s -> s.getName().equals(station));
+        return stations.stream().anyMatch(s -> s.equals(station));
     }
 
     @Override
