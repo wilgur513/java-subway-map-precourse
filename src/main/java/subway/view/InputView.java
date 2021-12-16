@@ -24,6 +24,12 @@ public class InputView {
 		return value;
 	}
 
+	public static String inputAddLine() {
+		String value = inputWithMessage("등록할 노선 이름을 입력하세요.");
+		validateAddLineName(value);
+		return value;
+	}
+
 	private static String inputWithMessage(String message) {
 		System.out.println("## " + message);
 		String value = SCANNER.next();
@@ -54,5 +60,15 @@ public class InputView {
 		Station station = StationRepository.findByName(value).get();
 		return LineRepository.lines().stream()
 			.anyMatch(l -> l.hasStation(station));
+	}
+
+	private static void validateAddLineName(String value) {
+		if(value.length() < 2) {
+			throw new IllegalArgumentException("노선 이름은 2글자 이상이여야 합니다.");
+		}
+
+		if(LineRepository.existsByName(value)) {
+			throw new IllegalArgumentException("이미 등록된 노선 이름입니다.");
+		}
 	}
 }

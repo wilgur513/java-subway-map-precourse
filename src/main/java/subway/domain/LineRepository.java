@@ -24,4 +24,8 @@ public class LineRepository {
     public static Optional<Line> findByName(String name) {
         return lines.stream().filter(l -> l.getName().equals(name)).findFirst();
     }
+
+    public static boolean existsByName(String name) {
+        return lines.stream().anyMatch(l -> l.getName().equals(name));
+    }
 }
