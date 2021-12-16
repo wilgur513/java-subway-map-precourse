@@ -12,6 +12,8 @@ public class Application {
             printManageStationPage();
 		} else if(option.equals("2")) {
 			printManageLinePage();
+		} else if(option.equals("3")) {
+			printManageSectionPage();
 		}
 	}
 }

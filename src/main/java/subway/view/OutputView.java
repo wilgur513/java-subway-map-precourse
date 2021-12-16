@@ -28,6 +28,14 @@ public class OutputView {
 		printBlankLine();
 	}
 
+	public static void printManageSectionPage() {
+		printHeader("구간 관리 화면");
+		printOptionMenu("1", "구간 등록");
+		printOptionMenu("2", "구간 삭제");
+		printOptionMenu("B", "돌아가기");
+		printBlankLine();
+	}
+
 	private static void printHeader(String message) {
 		System.out.println("## " + message);
 	}
