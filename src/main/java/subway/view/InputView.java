@@ -27,13 +27,19 @@ public class InputView {
 	public static String inputAddLine() {
 		String value = inputWithMessage("등록할 노선 이름을 입력하세요.");
 		validateLength(value, 2, "노선 이름은 2글자 이상이여야 합니다.");
-		validateExistLine(value, "이미 등록된 노선입니다.");
+		validateIsExistLine(value, "이미 등록된 노선입니다.");
 		return value;
 	}
 
 	public static String inputLastStation(String type) {
 		String value = inputWithMessage("등록할 노선의 " + type + " 종점역 이름을 입력하세요.");
 		validateIsNotExistStation(value, "등록되지 않은 역 이름입니다.");
+		return value;
+	}
+
+	public static String inputRemoveLine() {
+		String value = inputWithMessage("삭제할 노선 이름을 입력하세요.");
+		validateIsNotExistLine(value, "등록되지 않은 노선 이름입니다.");
 		return value;
 	}
 

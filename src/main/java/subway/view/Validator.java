@@ -35,14 +35,14 @@ public class Validator {
 			.anyMatch(l -> l.hasStation(station));
 	}
 
-	public static void validateExistLine(String value, String errorMessage) {
+	public static void validateIsExistLine(String value, String errorMessage) {
 		if (LineRepository.existsByName(value)) {
 			throw new IllegalArgumentException(errorMessage);
 		}
 	}
 
-	public static void validateNotExistLine(String value, String errorMessage) {
-		if (!StationRepository.existsByName(value)) {
+	public static void validateIsNotExistLine(String value, String errorMessage) {
+		if (!LineRepository.existsByName(value)) {
 			throw new IllegalArgumentException(errorMessage);
 		}
 	}
