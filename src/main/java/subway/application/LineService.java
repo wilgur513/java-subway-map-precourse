@@ -30,6 +30,12 @@ public class LineService {
 		line.addStation(station, order - 1);
 	}
 
+	public static void deleteSection(String lineName, String stationName) {
+		Line line = findLineByName(lineName);
+		Station station = findStationByName(stationName);
+		line.deleteStation(station);
+	}
+
 	private static Station findStationByName(String name) {
 		return StationRepository.findByName(name).get();
 	}

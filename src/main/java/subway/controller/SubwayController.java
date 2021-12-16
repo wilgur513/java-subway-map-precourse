@@ -79,6 +79,8 @@ public class SubwayController {
 
 		if (option.equals("1")) {
 			addSection();
+		} else if(option.equals("2")) {
+			removeSection();
 		}
 	}
 
@@ -93,6 +95,19 @@ public class SubwayController {
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 			addSection();
+		}
+	}
+
+	private void removeSection() {
+		try {
+			String lineName = retryInput(InputView::inputExistLine);
+			String stationName = retryInput(InputView::inputExistStation);
+			LineService.deleteSection(lineName, stationName);
+			OutputView.printInfoMessage("구간이 삭제되었습니다.");
+			System.out.println(LineRepository.lines());
+		} catch (IllegalArgumentException e) {
+			printErrorMessage(e.getMessage());
+			removeSection();
 		}
 	}
 

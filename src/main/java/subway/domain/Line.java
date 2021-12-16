@@ -50,4 +50,8 @@ public class Line {
     public boolean isValidOrder(Integer order) {
         return order >= 0 && order <= stations.size();
     }
+
+    public void deleteStation(Station station) {
+        stations.remove(station);
+    }
 }
