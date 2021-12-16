@@ -2,28 +2,18 @@ package subway;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
+import subway.controller.SubwayController;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Section;
 import subway.domain.Station;
 import subway.domain.StationRepository;
-import static subway.view.InputView.inputOption;
-import static subway.view.OutputView.*;
 
 public class Application {
 	public static void main(String[] args) {
 		saveInitialData();
-
-		printMainPage();
-		String option = inputOption();
-
-		if (option.equals("1")) {
-            printManageStationPage();
-		} else if(option.equals("2")) {
-			printManageLinePage();
-		} else if(option.equals("3")) {
-			printManageSectionPage();
-		}
+		SubwayController controller = new SubwayController();
+		controller.service();
 	}
 
 	private static void saveInitialData() {
