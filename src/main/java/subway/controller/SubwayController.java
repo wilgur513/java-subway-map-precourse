@@ -16,24 +16,33 @@ public class SubwayController {
 			printMainPage();
 			String option = retryInput(() -> inputOption("1", "2", "3", "4", "Q"));
 
-			if (option.equals("1")) {
-				manageStation();
-			} else if (option.equals("2")) {
-				manageLine();
-			} else if (option.equals("3")) {
-				manageSection();
-			} else if(option.equals("4")) {
-				printSubwayMap();
-			} else if (option.equals("Q")) {
+			if(option.equals("Q")) {
 				break;
 			}
+
+			handleMainPage(option);
 		}
 	}
 
-	private void manageStation() {
+	private void handleMainPage(String option) {
+		if (option.equals("1")) {
+			manageStationPage();
+		} else if (option.equals("2")) {
+			manageLinePage();
+		} else if (option.equals("3")) {
+			manageSectionPage();
+		} else if(option.equals("4")) {
+			printSubwayMapPage();
+		}
+	}
+
+	private void manageStationPage() {
 		printManageStationPage();
 		String option = retryInput(() -> inputOption("1", "2", "3", "B"));
+		handleManageStationPage(option);
+	}
 
+	private void handleManageStationPage(String option) {
 		if (option.equals("1")) {
 			String stationName = retryInput(InputView::inputAddStation);
 			StationRepository.addStation(Station.of(stationName));
@@ -47,10 +56,13 @@ public class SubwayController {
 		}
 	}
 
-	private void manageLine() {
+	private void manageLinePage() {
 		printManageLinePage();
 		String option = retryInput(() -> inputOption("1", "2", "3", "B"));
+		handleManageLinePage(option);
+	}
 
+	private void handleManageLinePage(String option) {
 		if (option.equals("1")) {
 			addLine();
 			OutputView.printInfoMessage("지하철 노선이 등록되었습니다.");
@@ -75,10 +87,13 @@ public class SubwayController {
 		}
 	}
 
-	private void manageSection() {
+	private void manageSectionPage() {
 		printManageSectionPage();
 		String option = retryInput(() -> inputOption("1", "2", "B"));
+		handleManageSectionPage(option);
+	}
 
+	private void handleManageSectionPage(String option) {
 		if (option.equals("1")) {
 			addSection();
 		} else if(option.equals("2")) {
@@ -110,7 +125,7 @@ public class SubwayController {
 		}
 	}
 
-	private void printSubwayMap() {
+	private void printSubwayMapPage() {
 		OutputView.printSubwayMap(LineRepository.lines());
 	}
 
