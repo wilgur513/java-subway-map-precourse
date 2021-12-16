@@ -107,7 +107,6 @@ public class SubwayController {
 			System.out.println(LineRepository.lines());
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
-			removeSection();
 		}
 	}
 

@@ -33,6 +33,11 @@ public class LineService {
 	public static void deleteSection(String lineName, String stationName) {
 		Line line = findLineByName(lineName);
 		Station station = findStationByName(stationName);
+
+		if (!line.hasStation(station)) {
+			throw new IllegalArgumentException("노선에 등록된 역이 없습니다.");
+		}
+
 		line.deleteStation(station);
 	}
 
