@@ -23,4 +23,8 @@ public class Line {
     public void addSection(Section section) {
         sections.add(section);
     }
+
+    public boolean hasStation(Station station) {
+        return sections.stream().anyMatch(s -> s.isStationOf(station));
+    }
 }

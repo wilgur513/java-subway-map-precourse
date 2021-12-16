@@ -12,4 +12,8 @@ public class Section {
 	public static Section of(Station station, int order) {
 		return new Section(station, order);
 	}
+
+	public boolean isStationOf(Station station) {
+		return this.station.equals(station);
+	}
 }

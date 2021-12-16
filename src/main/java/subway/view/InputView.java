@@ -1,6 +1,8 @@
 package subway.view;
 
 import java.util.Scanner;
+import subway.domain.LineRepository;
+import subway.domain.Station;
 import subway.domain.StationRepository;
 
 public class InputView {
@@ -12,7 +14,7 @@ public class InputView {
 
 	public static String inputAddStation() {
 		String value = inputWithMessage("등록할 역 이름을 입력하세요.");
-		validateStationName(value);
+		validateAddStationName(value);
 		return value;
 	}
 
@@ -29,7 +31,7 @@ public class InputView {
 		return value;
 	}
 
-	private static void validateStationName(String value) {
+	private static void validateAddStationName(String value) {
 		if (value.length() < 2) {
 			throw new IllegalArgumentException("역 이름은 2글자 이상이여야 합니다.");
 		}
@@ -42,5 +44,15 @@ public class InputView {
 		if(!StationRepository.existsByName(value)) {
 			throw new IllegalArgumentException("등록되지 않은 역 이름입니다.");
 		}
+
+		if(isIncludeInLine(value)) {
+			throw new IllegalArgumentException("노선에 등록된 역입니다.");
+		}
+	}
+
+	private static boolean isIncludeInLine(String value) {
+		Station station = StationRepository.findByName(value).get();
+		return LineRepository.lines().stream()
+			.anyMatch(l -> l.hasStation(station));
 	}
 }

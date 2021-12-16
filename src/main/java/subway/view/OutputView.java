@@ -1,5 +1,8 @@
 package subway.view;
 
+import java.util.List;
+import subway.domain.Station;
+
 public class OutputView {
 	public static void printMainPage() {
 		printHeader("화면 출력");
@@ -43,6 +46,12 @@ public class OutputView {
 
 	public static void printInfoMessage(String message) {
 		printInfo(message);
+		printBlankLine();
+	}
+
+	public static void printStations(List<Station> stations) {
+		printHeader("역 목록");
+		stations.stream().map(Station::getName).forEach(OutputView::printInfo);
 		printBlankLine();
 	}
 
