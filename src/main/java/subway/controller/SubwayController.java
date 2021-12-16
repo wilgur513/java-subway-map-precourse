@@ -14,7 +14,7 @@ public class SubwayController {
 	public void service() {
 		while (true) {
 			printMainPage();
-			String option = inputOption();
+			String option = retryInput(() -> inputOption("1", "2", "3", "Q"));
 
 			if (option.equals("1")) {
 				manageStation();
@@ -30,7 +30,7 @@ public class SubwayController {
 
 	private void manageStation() {
 		printManageStationPage();
-		String option = inputOption();
+		String option = retryInput(() -> inputOption("1", "2", "3", "B"));
 
 		if (option.equals("1")) {
 			String stationName = retryInput(InputView::inputAddStation);
@@ -47,7 +47,7 @@ public class SubwayController {
 
 	private void manageLine() {
 		printManageLinePage();
-		String option = inputOption();
+		String option = retryInput(() -> inputOption("1", "2", "3", "B"));
 
 		if (option.equals("1")) {
 			addLine();

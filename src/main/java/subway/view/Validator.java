@@ -1,5 +1,6 @@
 package subway.view;
 
+import java.util.Arrays;
 import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
@@ -43,6 +44,12 @@ public class Validator {
 
 	public static void validateIsNotExistLine(String value, String errorMessage) {
 		if (!LineRepository.existsByName(value)) {
+			throw new IllegalArgumentException(errorMessage);
+		}
+	}
+
+	public static void validateIsIncludeIn(String value, String errorMessage, String... validValues) {
+		if (!Arrays.stream(validValues).anyMatch(v -> v.equals(value))) {
 			throw new IllegalArgumentException(errorMessage);
 		}
 	}

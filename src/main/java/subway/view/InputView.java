@@ -6,8 +6,10 @@ import java.util.Scanner;
 public class InputView {
 	private static final Scanner SCANNER = new Scanner(System.in);
 
-	public static String inputOption() {
-		return inputWithMessage("원하는 기능을 선택하세요.");
+	public static String inputOption(String... validValues) {
+		String value = inputWithMessage("원하는 기능을 선택하세요.");
+		validateIsIncludeIn(value, "선택할 수 없는 기능입니다.", validValues);
+		return value;
 	}
 
 	public static String inputAddStation() {
